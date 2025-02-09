@@ -1,11 +1,12 @@
 package com.ggplay149.book_search_service.domain;
 
 import java.math.BigDecimal;
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class Book {
 
     private String bookId;
