@@ -2,12 +2,15 @@ package com.ggplay149.book_search_service.application.book;
 
 import com.ggplay149.book_search_service.domain.Book;
 import com.ggplay149.book_search_service.repo.book.BookRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 @Service
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookRepository bookRepository;
@@ -16,4 +19,17 @@ public class BookServiceImpl implements BookService{
     public List<Book> getAllBookList() {
         return bookRepository.getAllBookList();
     }
+
+    @Override
+    public Book getBookById(String bookId) { return bookRepository.getBookById(bookId); }
+
+    @Override
+    public List<Book> getBookListByCategory(String category) { return bookRepository.getBookListByCategory(category);}
+
+    @Override
+    public Set<Book> getBookListByFilter(Map<String, List<String>> filter) {
+        Set<Book> booksByFilter = bookRepository.getBookListByFilter(filter);
+        return booksByFilter;
+    }
+
 }
