@@ -1,10 +1,8 @@
 package com.ggplay149.book_search_service.domain;
 
 import java.math.BigDecimal;
-
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class Book {
@@ -19,5 +17,7 @@ public class Book {
     private long unitsInStock;
     private String releaseDate;
     private String condition;
+    private String fileName;
+    private MultipartFile bookImage;
 
 }

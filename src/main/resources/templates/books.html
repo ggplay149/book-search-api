@@ -7,6 +7,7 @@
         rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous">
+  <link href="/BookMarket/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -40,6 +41,7 @@
   <div class="row text-center">
     <div class="col-md-4 mb-4" th:each="book:${bookList}">
       <div class="card p-3 shadow-sm">
+        <img th:src="'/BookMarket/images/'+${book.fileName}" alt="image" style="width:60%"/>
         <h3 th:text="${book.name}"></h3>
         <p class="text-muted" th:text="${book.author}"></p>
         <p th:text="${book.publisher} + ' | ' + ${book.releaseDate}"></p>
