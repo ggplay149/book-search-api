@@ -2,11 +2,16 @@ package com.ggplay149.book_search_service.ui.controller;
 
 import com.ggplay149.book_search_service.application.book.BookService;
 import com.ggplay149.book_search_service.domain.Book;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,6 +82,20 @@ public class BookController {
         bookService.setNewBook(book);
         return "redirect:/books";
     }
+
+    @GetMapping("/download")
+    public void downloadBookImage(@RequestParam("file")String paramKey, HttpServletResponse response) throws IOException {
+        File imageFile = new File(fileDir+paramKey);
+        response.setContentType("application/download");
+        response.setContentLength((int)imageFile.length());
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + paramKey + "\"");
+        OutputStream os = response.getOutputStream();
+        FileInputStream fis = new FileInputStream(imageFile);
+        FileCopyUtils.copy(fis,os);
+        fis.close();
+        os.close();
+    }
+
 
     @ModelAttribute
     public void addAttributes(Model model) {
